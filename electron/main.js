@@ -1,5 +1,7 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, protocol } = require('electron');
 const path = require('path');
+const { readFile } = require('fs');
+const { URL } = require('url');
 const isDev = process.env.NODE_ENV === 'development';
 
 function createWindow() {
