@@ -1,5 +1,5 @@
+import { Moon, Sun } from '@tamagui/lucide-icons';
 import { Button } from 'tamagui';
-import { Sun, Moon } from '@tamagui/lucide-icons';
 import { useTheme } from '../contexts/ThemeContext';
 
 export function ThemeToggle() {
@@ -21,11 +21,7 @@ export function ThemeToggle() {
         backgroundColor: '$backgroundHover',
       }}
     >
-      {isDark ? (
-        <Sun size={20} color="$color" />
-      ) : (
-        <Moon size={20} color="$color" />
-      )}
+      {isDark ? <Sun size={20} color="$color" /> : <Moon size={20} color="$color" />}
     </Button>
   );
 }

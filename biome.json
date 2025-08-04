@@ -1,0 +1,67 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noDoubleEquals": "error",
+        "noDebugger": "error"
+      },
+      "style": {
+        "noUnusedTemplateLiteral": "error",
+        "useConst": "error",
+        "useTemplate": "error"
+      },
+      "complexity": {
+        "noForEach": "off",
+        "noBannedTypes": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "warn"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "lineEnding": "lf"
+  },
+  "javascript": {
+    "formatter": {
+      "semicolons": "always",
+      "trailingCommas": "all",
+      "quoteStyle": "single"
+    }
+  },
+  "json": {
+    "formatter": {
+      "enabled": true,
+      "indentWidth": 2
+    }
+  },
+  "files": {
+    "includes": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx", "**/*.json", "**/*.jsonc"],
+    "ignoreUnknown": false,
+    "experimentalScannerIgnores": [
+      "**/node_modules",
+      "**/dist",
+      "**/build",
+      "**/web-build",
+      "**/.expo",
+      "**/electron/dist",
+      "**/package-lock.json",
+      "**/tsconfig.json",
+      "**/expo-env.d.ts"
+    ]
+  }
+}

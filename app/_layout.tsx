@@ -1,15 +1,15 @@
-import '../global.css'
-import '../tamagui-web.css'
+import '../global.css';
+import '../tamagui-web.css';
 
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { TamaguiProvider } from 'tamagui';
-import tamaguiConfig from '../tamagui.config';
 import { ThemeProvider, useTheme } from '../contexts/ThemeContext';
+import tamaguiConfig from '../tamagui.config';
 
 function AppContent() {
   const { theme } = useTheme();
-  
+
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme={theme}>
       <Stack>
