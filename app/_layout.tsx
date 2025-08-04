@@ -1,15 +1,29 @@
 import '../global.css'
+import '../tamagui-web.css'
 
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { TamaguiProvider } from 'tamagui';
+import tamaguiConfig from '../tamagui.config';
+import { ThemeProvider, useTheme } from '../contexts/ThemeContext';
 
-export default function RootLayout() {
+function AppContent() {
+  const { theme } = useTheme();
+  
   return (
-    <>
+    <TamaguiProvider config={tamaguiConfig} defaultTheme={theme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
-      <StatusBar style="auto" />
-    </>
+      <StatusBar style={theme === 'dark' ? 'light' : 'dark'} />
+    </TamaguiProvider>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }

@@ -1,19 +1,34 @@
 {
   "name": "zhenren",
+  "description": "A universal React Native app with Electron desktop support",
+  "author": "Your Name",
   "main": "expo-router/entry",
+  "homepage": "./",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "electron": "electron electron/main.js",
+    "electron-dev": "NODE_ENV=development electron electron/main.js",
+    "build-web": "expo export -p web --output-dir web-build",
+    "build-electron": "npm run build-web && electron-builder",
+    "build-osx": "npm run build-web && electron-builder --mac",
+    "build-osx-arm64": "npm run build-web && electron-builder --mac --arm64",
+    "build-osx-x64": "npm run build-web && electron-builder --mac --x64",
+    "build-osx-universal": "npm run build-web && electron-builder --mac --arm64 --x64",
+    "build-windows": "npm run build-web && electron-builder --win"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
     "@react-navigation/native": "^7.1.6",
+    "@tamagui/babel-plugin": "^1.132.15",
+    "@tamagui/config": "^1.132.15",
+    "@tamagui/lucide-icons": "^1.132.15",
     "expo": "~53.0.20",
     "expo-blur": "~14.1.5",
     "expo-constants": "~17.1.7",
@@ -36,15 +51,49 @@
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
     "react-native-web": "~0.20.0",
-    "react-native-webview": "13.13.5"
+    "react-native-webview": "13.13.5",
+    "tamagui": "^1.132.15"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
+    "electron": "^37.2.5",
+    "electron-builder": "^26.0.12",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~9.2.0",
+    "lightningcss": "^1.30.1",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.8.3"
   },
-  "private": true
+  "private": true,
+  "build": {
+    "appId": "com.zhenren.app",
+    "productName": "Zhenren",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "web-build/**/*",
+      "electron/main.js",
+      {
+        "from": ".",
+        "to": ".",
+        "filter": ["package.json"]
+      }
+    ],
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
 }

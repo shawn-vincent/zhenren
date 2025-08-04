@@ -6,6 +6,16 @@ module.exports = function (api) {
       'nativewind/babel',
     ],
     plugins: [
+      // Temporarily disabled Tamagui babel plugin due to config loading issues
+      // [
+      //   '@tamagui/babel-plugin',
+      //   {
+      //     components: ['tamagui'],
+      //     config: './tamagui.config.ts',
+      //     logTimings: false,
+      //     disableExtraction: true,
+      //   },
+      // ],
       'react-native-reanimated/plugin',
     ],
   };
