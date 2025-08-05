@@ -1,7 +1,5 @@
-const { app, BrowserWindow, protocol } = require('electron');
-const path = require('path');
-const { readFile } = require('fs');
-const { URL } = require('url');
+const { app, BrowserWindow } = require('electron');
+const path = require('node:path');
 const isDev = process.env.NODE_ENV === 'development';
 
 function createWindow() {
@@ -59,8 +57,8 @@ app.on('activate', () => {
 });
 
 // Security: Prevent new window creation
-app.on('web-contents-created', (event, contents) => {
-  contents.on('new-window', (event, url) => {
+app.on('web-contents-created', (_event, contents) => {
+  contents.on('new-window', (event, _url) => {
     event.preventDefault();
   });
 });

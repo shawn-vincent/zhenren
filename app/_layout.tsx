@@ -5,13 +5,13 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { TamaguiProvider } from 'tamagui';
 import { ThemeProvider, useTheme } from '../contexts/ThemeContext';
-import tamaguiConfig from '../tamagui.config';
+import config from '../tamagui.config';
 
 function AppContent() {
   const { theme } = useTheme();
 
   return (
-    <TamaguiProvider config={tamaguiConfig} defaultTheme={theme}>
+    <TamaguiProvider config={config} defaultTheme={theme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
