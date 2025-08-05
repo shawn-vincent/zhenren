@@ -4,22 +4,35 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a universal React Native application built with Expo SDK 53 that targets iOS, Android, and web platforms from a single codebase. The project combines **Tamagui** for performant cross-platform UI components and **NativeWind** for Tailwind CSS utilities in React Native.
+This is a universal React Native application built with Expo SDK 53 that targets iOS, Android, web, and desktop (Electron) platforms from a single codebase. The project combines **Tamagui** for performant cross-platform UI components and **NativeWind** for Tailwind CSS utilities in React Native. It includes a complete theming system with light/dark mode support.
 
 ## Development Commands
 
 ```bash
-# Start development server with platform selection
-npm start                 # Expo development server with QR code
+# Development servers
+npm start                # Expo development server with QR code
 npm run android          # Launch on Android device/emulator
-npm run ios             # Launch on iOS simulator
-npm run web             # Launch web version at localhost:8081
+npm run ios              # Launch on iOS simulator  
+npm run web              # Launch web version at localhost:8081
+npm run electron         # Launch Electron desktop app
+npm run electron-dev     # Launch Electron in development mode
 
-# Linting and code quality
-npm run lint            # Run Expo's ESLint configuration
+# Code quality and linting
+npm run typecheck        # TypeScript type checking
+npm run lint             # Biome linting with auto-fix
+npm run lint:biome       # Biome linting only
+npm run lint:expo        # Expo ESLint configuration
+npm run format           # Biome code formatting
+npm run check            # Run all checks (typecheck + lint)
 
-# Project management
-npm run reset-project   # Move current app to app-example and create blank app directory
+# Production builds
+npm run build            # Build all platforms (iOS, Android, Web)
+npm run build:ios        # Build iOS using EAS (requires EAS CLI)
+npm run build:android    # Build Android using EAS (requires EAS CLI)  
+npm run build:web        # Build web version
+npm run build:electron   # Build Electron desktop app
+npm run build:osx        # Build macOS desktop app
+npm run build:windows    # Build Windows desktop app
 ```
 
 ## UI Framework Architecture
@@ -60,19 +73,30 @@ module.exports = withNativeWind(config, { input: './global.css' });
 
 ### App Provider Structure
 The root layout (`app/_layout.tsx`) wraps the app with both providers:
-1. `TamaguiProvider` (outer) - provides Tamagui design system
-2. `ThemeProvider` (inner) - provides React Navigation theming
+1. `ThemeProvider` (outer) - provides custom theme context with light/dark mode
+2. `TamaguiProvider` (inner) - provides Tamagui design system, configured with current theme
 3. Imports both `global.css` and `tamagui-web.css`
+
+### Theme System
+- Custom theme context in `contexts/ThemeContext.tsx` provides `theme`, `toggleTheme`, and `isDark`
+- Automatically detects system color scheme on initial load
+- Theme state integrates with both Tamagui and Expo StatusBar
+- Use `useTheme()` hook to access theme state in components
 
 ## File-Based Routing
 
 Uses Expo Router with the following structure:
-- `app/_layout.tsx` - Root layout with providers
-- `app/(tabs)/` - Tab navigation group
-- `app/(tabs)/_layout.tsx` - Tab layout configuration
-- `app/(tabs)/index.tsx` - Home tab screen
-- `app/(tabs)/explore.tsx` - Explore tab screen
-- `app/+not-found.tsx` - 404 page
+- `app/_layout.tsx` - Root layout with theme and Tamagui providers
+- `app/index.tsx` - Main home screen with theme toggle
+- Uses single-screen layout (no tabs currently configured)
+
+## Desktop Integration (Electron)
+
+- `electron/main.js` - Electron main process with security configurations
+- Loads from Expo dev server in development (`localhost:8081`)
+- Loads from `web-build/` directory in production
+- Security features: disabled node integration, enabled context isolation
+- Platform-specific behaviors for macOS window management
 
 ## Package Version Constraints
 
@@ -102,10 +126,20 @@ npx expo start -c
 ## Platform-Specific Considerations
 
 - **Web**: Automatically supported via React Native for Web
-- **Mobile**: Uses native components via React Native
+- **Mobile**: Uses native components via React Native  
+- **Desktop**: Electron wrapper for native desktop experience
 - **Styling**: Both Tamagui and NativeWind work across all platforms
 - **Icons**: Tamagui Lucide icons render appropriately on each platform
 - **Navigation**: Expo Router handles both web URLs and native navigation
+- **Theming**: Custom theme system works consistently across all platforms
+
+## Code Quality Tools
+
+The project uses **Biome** as the primary linting and formatting tool, with ESLint as a secondary check:
+- `biome.json` - Comprehensive linting rules with TypeScript support
+- Enforces modern Node.js import protocols (`node:` prefix)
+- Automatically fixes common issues with `npm run lint`
+- Always run `npm run check` before committing to ensure code quality
 
 ## TypeScript Configuration
 
