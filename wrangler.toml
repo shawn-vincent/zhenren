@@ -1,0 +1,7 @@
+name = "zhenren"
+compatibility_date = "2024-08-06"
+
+[[pages]]
+project_name = "zhenren"
+build_command = "npm run build:web"
+build_output_dir = "dist/web"
