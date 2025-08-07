@@ -30,13 +30,21 @@ jobs:
       - name: Build client
         run: npm run client:build
       
+      - name: Create Pages Project (if needed)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages project create zhenren --production-branch=main
+        continue-on-error: true
+      
       - name: Deploy Pages (Client)
         id: pages-deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy client/dist/web --project-name=zhenren --compatibility-date=2024-08-06
+          command: pages deploy client/dist/web --project-name=zhenren
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Deploy Worker (API)
