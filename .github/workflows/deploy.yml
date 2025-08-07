@@ -36,7 +36,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy client/dist/web --project-name=zhenren
+          command: pages deploy client/dist/web --project-name=zhenren --compatibility-date=2024-08-06
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Deploy Worker (API)
