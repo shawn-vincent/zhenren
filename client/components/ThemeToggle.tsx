@@ -1,16 +1,16 @@
 import { Moon, Sun } from '@tamagui/lucide-icons';
-import { Button } from 'tamagui';
 import { useTheme } from '../contexts/ThemeContext';
+import { IconButton } from './IconButton';
 
 export function ThemeToggle() {
   const { isDark, toggleTheme } = useTheme();
 
   return (
-    <Button
-      size="$3"
-      circular
+    <IconButton
+      icon={isDark ? Sun : Moon}
       onPress={toggleTheme}
       backgroundColor="$background"
+      color="$color"
       borderColor="$borderColor"
       borderWidth={1}
       pressStyle={{
@@ -20,8 +20,6 @@ export function ThemeToggle() {
       hoverStyle={{
         backgroundColor: '$backgroundHover',
       }}
-    >
-      {isDark ? <Sun size={20} color="$color" /> : <Moon size={20} color="$color" />}
-    </Button>
+    />
   );
 }
