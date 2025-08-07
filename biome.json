@@ -54,9 +54,9 @@
     "ignoreUnknown": false,
     "experimentalScannerIgnores": [
       "**/node_modules",
-      "**/dist",
       "**/build",
-      "**/web-build",
+      "**/client/dist",
+      "**/api/dist",
       "**/.expo",
       "**/electron/dist",
       "**/package-lock.json",

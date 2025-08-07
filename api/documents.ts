@@ -7,7 +7,8 @@ export async function handleDocuments(request: Request, env: Env): Promise<Respo
 
   // POST /api/documents - Create document
   if (path === '/api/documents' && method === 'POST') {
-    const { title, content } = await request.json();
+    const body = await request.json() as { title: string; content: string };
+    const { title, content } = body;
     const id = crypto.randomUUID();
 
     // Generate embedding using Cloudflare AI Workers

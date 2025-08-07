@@ -23,7 +23,7 @@ function createWindow() {
     mainWindow.webContents.openDevTools();
   } else {
     // In production, load the built web files
-    mainWindow.loadFile(path.join(__dirname, '../web-build/index.html'));
+    mainWindow.loadFile(path.join(__dirname, '../dist/web/index.html'));
   }
 
   // Show window when ready to prevent visual flash
