@@ -1,0 +1,15 @@
+name = "zhenren-api"
+main = "index.ts"
+compatibility_date = "2024-08-06"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "zhenren"
+database_id = "807d9c3a-afc2-4d06-8e76-c74fc4d4015c"
+
+[[vectorize]]
+binding = "VECTORS"
+index_name = "zhenren-vectors"
+
+[ai]
+binding = "AI"

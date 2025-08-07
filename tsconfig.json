@@ -21,6 +21,7 @@
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
+    "types": ["@cloudflare/workers-types"],
     "paths": {
       "@/*": ["./*"]
     }
